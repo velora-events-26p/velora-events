@@ -32,7 +32,7 @@ import {Music4,Heart,Building2,PartyPopper,ShieldCheck,Users,Clock3,MapPin,Star,
               the glowing background.
           ======================================================== */}
   
-          <div className="relative max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-20 items-center">
+          <div className="relative max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-10 items-center">
   
             {/* ===================================================
                 LEFT SIDE
@@ -130,40 +130,36 @@ import {Music4,Heart,Building2,PartyPopper,ShieldCheck,Users,Clock3,MapPin,Star,
                   These three classes create the frosted glass.
               ==================================================== */}
   
-              <div className="absolute -left-10 top-16 backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-6 shadow-2xl">
-  
-                <CalendarDays
-                  className="text-amber-500 mb-4"
-                  size={35}
-                />
-  
-                <p className="text-sm text-gray-300">
-  
-                  Upcoming Event
-  
-                </p>
-  
-                <h3 className="text-2xl font-bold mt-2">
-  
-                  Nairobi Music Fest
-  
-                </h3>
-  
-                <p className="text-gray-400 mt-3">
-  
-                  July 25 • KICC
-  
-                </p>
-  
-              </div>
+  <div className="absolute inset-0 flex items-center justify-center z-10">
+  <div className="max-w-xs backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-6 shadow-2xl">
+
+    <CalendarDays
+      className="text-amber-500 mb-4"
+      size={35}
+    />
+
+    <p className="text-sm text-white">
+      Upcoming Event
+    </p>
+
+    <h3 className="text-2xl font-bold mt-2">
+      Nairobi Music Fest
+    </h3>
+
+    <p className="text-white mt-3">
+      July 25 • KICC
+    </p>
+
+  </div>
+</div>
   
               {/* Hero Image */}
   
-              <img
+             {/*  <img
                 src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80"
                 alt="Luxury Event"
                 className="rounded-[40px] w-full max-w-lg shadow-[0_20px_80px_rgba(245,158,11,0.25)] hover:scale-105 transition duration-700"
-              />
+              /> */}
   
             </div>
   
