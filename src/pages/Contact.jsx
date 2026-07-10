@@ -14,23 +14,31 @@ export default function Contact({ onSubmit = () => { } }) {
         e.preventDefault();
         onSubmit(form);
         setSubmitted(true);
+        setForm({ name: "", email: "", subject: "", message: "" });
     };
 
     return (
-        <div className="space-y-6 rounded-2xl border border-stone-200 bg-stone-900 p-6 shadow-sm md:p-8 font-['Poppins']">
-            <h2 className="border-b border-stone-100 pb-3 text-xl font-bold text-amber-400">
-                Send Us A Message
-            </h2>
+        <div className="flex min-h-[80vh] items-center justify-center p-4 sm:p-6 lg:p-8">
+            <div className="space-y-6 rounded-2xl border border-stone-200  p-6 shadow-sm md:p-8 font-['Poppins']">
 
             {submitted ? (
                 <div className="rounded-xl bg-stone-50/60 border border-amber-200 p-4 text-sm font-medium text-amber-900 transition-all">
                     Thanks for reaching out — our team will get back to you shortly.
+                    
+                    <button
+                    type="button"
+                    onClick={() => setSubmitted(false)} 
+                    className="mt-2 block text-xs font-semibold underline"
+                    >
+                    Send another message
+                    </button>
+
                 </div>
             ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
-                            <label className="mb-1.5 block text-xs font-semibold text-white">
+                            <label className="mb-1.5 block text-xs font-semibold text-stone-500">
                                 Your Full Name
                             </label>
                             <input
@@ -39,11 +47,11 @@ export default function Contact({ onSubmit = () => { } }) {
                                 required
                                 value={form.name}
                                 onChange={handleChange}
-                                className="w-full rounded-lg border border-stone-200 bg-amber-50 p-2.5 text-sm outline-none transition-all text-amber-900"
+                                className="w-full rounded-lg border border-stone-200  p-2.5 text-sm outline-none transition-all"
                             />
                         </div>
                         <div>
-                            <label className="mb-1.5 block text-xs font-semibold text-white">
+                            <label className="mb-1.5 block text-xs font-semibold text-stone-500">
                                 Email Address
                             </label>
                             <input
@@ -52,13 +60,13 @@ export default function Contact({ onSubmit = () => { } }) {
                                 required
                                 value={form.email}
                                 onChange={handleChange}
-                                className="w-full rounded-lg border border-stone-200 bg-amber-50 p-2.5 text-sm outline-none transition-all  text-amber-900"
+                                className="w-full rounded-lg border border-stone-200  p-2.5 text-sm outline-none transition-all "
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label className="mb-1.5 block text-xs font-semibold text-white">
+                        <label className="mb-1.5 block text-xs font-semibold text-stone-500">
                             Subject
                         </label>
                         <input
@@ -68,12 +76,12 @@ export default function Contact({ onSubmit = () => { } }) {
                             required
                             value={form.subject}
                             onChange={handleChange}
-                            className="w-full rounded-lg border border-stone-200 bg-amber-50 p-2.5 text-sm outline-none transition-all  text-amber-900"
+                            className="w-full rounded-lg border border-stone-200  p-2.5 text-sm outline-none transition-all "
                         />
                     </div>
 
                     <div>
-                        <label className="mb-1.5 block text-xs font-semibold text-white">
+                        <label className="mb-1.5 block text-xs font-semibold text-stone-500">
                             Message
                         </label>
                         <textarea
@@ -89,7 +97,7 @@ export default function Contact({ onSubmit = () => { } }) {
 
                     <button
                         type="submit"
-                        className="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 py-3 font-semibold text-stone-950 shadow-sm transition-all hover:bg-amber-400 active:scale-[0.99]"
+                        className="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 py-3 font-semibold text-stone-950 shadow-sm transition-all hover:bg-amber-300 active:scale-[0.99]"
                     >
                         <Send size={14} className="stroke-[2.5]" />
                         Send Message
@@ -97,5 +105,7 @@ export default function Contact({ onSubmit = () => { } }) {
                 </form>
             )}
         </div>
+        </div>
+
     )
 }
