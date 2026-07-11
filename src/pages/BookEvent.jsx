@@ -14,7 +14,7 @@ const fallbackEventsData =
 
 const loadEventsData = async () => {
   try {
-    const mod = await import("@/data/Events.json");
+    const mod = await import("@/data/events.json");
     return mod.default ?? mod;
   } catch (err) {
     console.warn("Data not resolvable here.");
