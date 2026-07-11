@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <footer className="bg-black text-stone-300">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+       <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           {/* Brand */}
           <div>
             <h2 className="text-2xl font-bold text-amber-500">Velora Events</h2>
@@ -34,13 +34,12 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/" className="hover:text-amber-500 transition-colors">Home</a></li>
               <li><a href="/events" className="hover:text-amber-500 transition-colors">Events</a></li>
-              <li><a href="/about" className="hover:text-amber-500 transition-colors">About</a></li>
               <li><a href="/contact" className="hover:text-amber-500 transition-colors">Contact</a></li>
             </ul>
           </div>
 
           {/* Categories */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold text-white mb-4">
               Categories
             </h3>
@@ -51,7 +50,7 @@ const Footer = () => {
               <li>Sports</li>
               <li>Workshops</li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Contact */}
           <div>
