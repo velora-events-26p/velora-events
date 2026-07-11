@@ -321,11 +321,11 @@ import {Music4,Heart,Building2,PartyPopper,ShieldCheck,Users,Clock3,MapPin,Star,
 
 </section>
 
-      {/* =======================================================
+     {/*  {/* =======================================================
           STATS SECTION
       ======================================================== */}
 
-<section className="py-20 bg-black">
+{/* <section className="py-20 bg-black">
 
 <div className="max-w-6xl mx-auto">
 
@@ -383,7 +383,7 @@ import {Music4,Heart,Building2,PartyPopper,ShieldCheck,Users,Clock3,MapPin,Star,
 
 </div>
 
-</section>
+</section>  */}
 
       {/* =======================================================
           WHY CHOOSE VELORA
