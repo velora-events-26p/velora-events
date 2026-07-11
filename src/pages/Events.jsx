@@ -1,307 +1,231 @@
-// React Hooks
-import { useEffect, useMemo, useState } from "react";
-
-// React Router
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  CalendarDays,
+  MapPin,
+  Search,
+  Ticket,
+} from "lucide-react";
 
-// Local JSON (Our Local API)
-import eventsData from "../data/Events.json";
+import events from "@/data/events.json";
 
-// Icons
-import {Search,CalendarDays,MapPin,Ticket} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 function Events() {
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-    // Stores all the events fetched from Events.json
-    const [events, setEvents] = useState([]);
-  
-    // Stores what the user types in the search bar
-    const [search, setSearch] = useState("");
-  
-    // Stores the currently selected category
-    const [selectedCategory, setSelectedCategory] = useState("All");
+  // Generate categories automatically from events.json.
+  const categories = useMemo(() => {
+    const eventCategories = events
+      .map((event) => event.category)
+      .filter(Boolean);
 
-      // Load all events when the page loads
-  useEffect(() => {
-    setEvents(eventsData);
+    return ["All", ...new Set(eventCategories)];
   }, []);
 
-    // Automatically generate categories from Events.json
-    const categories = useMemo(() => {
-        return [
-          "All",
-          ...new Set(events.map((event) => event.category))
-        ];
-      }, [events]);
+  // Filter events whenever search text or category changes.
+  const filteredEvents = useMemo(() => {
+    const normalizedSearch = search.trim().toLowerCase();
 
-        // Filter events based on search text and selected category
-  const filteredEvents = events.filter((event) => {
+    return events.filter((event) => {
+      const title = event.title?.toLowerCase() || "";
+      const location = event.location?.toLowerCase() || "";
 
-    // Check category
-    const matchesCategory =
-      selectedCategory === "All" ||
-      event.category === selectedCategory;
+      const matchesCategory =
+        selectedCategory === "All" ||
+        event.category === selectedCategory;
 
-    // Check search input
-    const matchesSearch =
-      event.title.toLowerCase().includes(search.toLowerCase()) ||
-      event.location.toLowerCase().includes(search.toLowerCase());
+      const matchesSearch =
+        title.includes(normalizedSearch) ||
+        location.includes(normalizedSearch);
 
-    // Return events matching both conditions
-    return matchesCategory && matchesSearch;
-
-  });
+      return matchesCategory && matchesSearch;
+    });
+  }, [search, selectedCategory]);
 
   return (
-
-    <section className="min-h-screen bg-black text-white pt-32 pb-20">
-
-      <div className="max-w-7xl mx-auto px-6">
-                {/* ===============================
-             Hero Section
-        =============================== */}
-
-<div className="text-center mb-14">
-
-<h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold">
-
-  Discover Amazing{" "}
-
-  <span className="text-amber-500">
-    Events
-  </span>
-
-</h1>
-
-<p className="text-gray-400 mt-6 max-w-2xl mx-auto leading-relaxed">
-
-  Browse concerts, festivals, conferences,
-  weddings, sports events and unforgettable
-  experiences happening around you.
-
-</p>
-
-</div>
-        {/* ===============================
-             Search Bar
-        =============================== */}
-
-<div className="relative max-w-3xl mx-auto mb-16">
-
-<Search
-  className="absolute left-5 top-4 text-gray-400"
-  size={22}
-/>
-
-<input
-  type="text"
-  placeholder="Search events by title or location..."
-
-  value={search}
-
-  onChange={(e) => setSearch(e.target.value)}
-
-  className="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl py-4 pl-14 pr-5 text-white focus:outline-none focus:border-amber-500"
-
-/>
-
-</div>
-        {/* =====================================
-              Main Content (Sidebar + Events)
-        ====================================== */}
-
-<div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
-
-{/* =====================================
-      Left Sidebar - Categories
-====================================== */}
-
-<div className="lg:col-span-1">
-
-  {/* Glassmorphism Sidebar */}
-  <div className="sticky top-28 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
-
-    <h2 className="text-2xl font-bold mb-6">
-
-      Categories
-
-    </h2>
-
-    {/* Dynamic Category Buttons */}
-    <div className="flex lg:flex-col flex-wrap gap-3">
-
-      {categories.map((category) => (
-
-        <button
-          key={category}
-
-          onClick={() => setSelectedCategory(category)}
-
-          className={`px-5 py-3 rounded-xl transition duration-300 text-left font-medium
-
-          ${
-            selectedCategory === category
-
-              ? "bg-amber-500 text-black"
-
-              : "bg-white/5 text-gray-300 hover:bg-amber-500 hover:text-black"
-          }`}
-
-        >
-
-          {category}
-
-        </button>
-
-      ))}
-
-    </div>
-
-  </div>
-
-</div>
-
-{/* =====================================
-       Right Side - Event Cards
-====================================== */}
-
-<div className="lg:col-span-3">
-
-  {filteredEvents.length === 0 ? (
-
-    <div className="text-center py-20">
-
-      <h2 className="text-3xl font-bold">
-
-        No Events Found
-
-      </h2>
-
-      <p className="text-gray-400 mt-4">
-
-        Try searching for another event or category.
-
-      </p>
-
-    </div>
-
-  ) : (
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-
-      {filteredEvents.map((event) => (
-
-        <div
-
-          key={event.id}
-
-          className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden hover:border-amber-500 hover:-translate-y-3 transition-all duration-500 shadow-xl"
-
-        >
-
-          {/* Event Image */}
-
-          <div className="overflow-hidden">
-
-            <img
-
-              src={event.image}
-
-              alt={event.title}
-
-              className="h-60 w-full object-cover group-hover:scale-110 transition duration-700"
-
-            />
-
-          </div>
-
-          {/* Card Content */}
-
-          <div className="p-6">
-
-            <span className="inline-block bg-amber-500 text-black text-xs font-semibold px-3 py-1 rounded-full">
-
-              {event.category}
-
-            </span>
-
-            <h2 className="text-2xl font-bold mt-4">
-
-              {event.title}
-
-            </h2>
-
-            {/* Location */}
-
-            <div className="flex items-center gap-2 mt-4 text-gray-400">
-
-              <MapPin size={18} />
-
-              <span>{event.location}</span>
-
-            </div>
-
-            {/* Date */}
-
-            <div className="flex items-center gap-2 mt-3 text-gray-400">
-
-              <CalendarDays size={18} />
-
-              <span>{event.date}</span>
-
-            </div>
-
-            {/* Price */}
-
-            <div className="flex items-center gap-2 mt-3">
-
-              <Ticket
-                size={18}
-                className="text-amber-500"
-              />
-
-              <span className="text-amber-500 font-bold">
-
-                KES {event.price}
-
-              </span>
-
-            </div>
-
-            {/* View Details Button */}
-
-            <Link
-
-              to={`/events/${event.id}`}
-
-              className="block mt-6 bg-amber-500 text-center text-black font-semibold py-3 rounded-xl hover:bg-amber-400 transition"
-
-            >
-
-              View Details
-
-            </Link>
-
-          </div>
-
+    <section className="min-h-screen bg-stone-50 py-16 text-stone-900">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Page heading */}
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          <Badge className="mb-4 bg-amber-100 text-amber-800 hover:bg-amber-100">
+            Explore Velora
+          </Badge>
+
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            Discover amazing{" "}
+            <span className="text-amber-600">events</span>
+          </h1>
+
+          <p className="mt-5 text-base leading-7 text-stone-600 sm:text-lg">
+            Browse concerts, festivals, conferences, sports events, workshops,
+            and unforgettable experiences happening around you.
+          </p>
         </div>
 
-      ))}
+        {/* Search */}
+        <div className="relative mx-auto mb-12 max-w-3xl">
+          <Search
+            aria-hidden="true"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400"
+            size={20}
+          />
 
-    </div>
+          <Input
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Search by event title or location..."
+            aria-label="Search events"
+            className="h-12 rounded-xl border-stone-300 bg-white pl-12 focus-visible:border-amber-500 focus-visible:ring-amber-500/30"
+          />
+        </div>
 
-  )}
+        <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
+          {/* Categories */}
+          <aside>
+            <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
+              <h2 className="mb-5 text-xl font-semibold">Categories</h2>
 
-</div>
+              <div className="flex flex-wrap gap-2 lg:flex-col">
+                {categories.map((category) => {
+                  const isActive = selectedCategory === category;
 
-</div>
+                  return (
+                    <Button
+                      key={category}
+                      type="button"
+                      variant={isActive ? "default" : "ghost"}
+                      onClick={() => setSelectedCategory(category)}
+                      className={
+                        isActive
+                          ? "justify-start bg-amber-500 text-stone-950 hover:bg-amber-600"
+                          : "justify-start text-stone-600 hover:bg-stone-100 hover:text-stone-900"
+                      }
+                    >
+                      {category}
+                    </Button>
+                  );
+                })}
+              </div>
+            </div>
+          </aside>
 
-</div>
+          {/* Events */}
+          <div>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-bold">Upcoming events</h2>
+                <p className="mt-1 text-sm text-stone-500">
+                  {filteredEvents.length}{" "}
+                  {filteredEvents.length === 1 ? "event" : "events"} found
+                </p>
+              </div>
 
-</section>
+              {(search || selectedCategory !== "All") && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    setSearch("");
+                    setSelectedCategory("All");
+                  }}
+                  className="border-stone-300"
+                >
+                  Clear filters
+                </Button>
+              )}
+            </div>
 
-);
+            {filteredEvents.length === 0 ? (
+              <div className="rounded-2xl border border-stone-200 bg-white px-6 py-16 text-center">
+                <h3 className="text-2xl font-semibold">No events found</h3>
 
+                <p className="mt-3 text-stone-600">
+                  Try another search term or select a different category.
+                </p>
+              </div>
+            ) : (
+              <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                {filteredEvents.map((event) => (
+                  <Card
+                    key={event.id}
+                    className="group overflow-hidden border-stone-200 bg-white py-0 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <div className="overflow-hidden">
+                      <img
+                        src={event.image}
+                        alt={event.title}
+                        className="h-52 w-full object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    </div>
+
+                    <CardHeader className="space-y-3 px-5 pt-5">
+                      <Badge className="w-fit bg-amber-100 text-amber-800 hover:bg-amber-100">
+                        {event.category || "General"}
+                      </Badge>
+
+                      <CardTitle className="line-clamp-2 text-xl">
+                        {event.title}
+                      </CardTitle>
+                    </CardHeader>
+
+                    <CardContent className="space-y-3 px-5 text-sm text-stone-600">
+                      <p className="flex items-start gap-2">
+                        <MapPin
+                          size={17}
+                          className="mt-0.5 shrink-0 text-amber-600"
+                        />
+                        <span>{event.location || "Location unavailable"}</span>
+                      </p>
+
+                      <p className="flex items-start gap-2">
+                        <CalendarDays
+                          size={17}
+                          className="mt-0.5 shrink-0 text-amber-600"
+                        />
+                        <span>
+                          {event.date || "Date unavailable"}
+                          {event.time ? ` • ${event.time}` : ""}
+                        </span>
+                      </p>
+
+                      <p className="flex items-center gap-2 font-semibold text-stone-900">
+                        <Ticket size={17} className="text-amber-600" />
+
+                        {Number(event.price) === 0
+                          ? "Free"
+                          : `KES ${Number(event.price).toLocaleString()}`}
+                      </p>
+                    </CardContent>
+
+                    <CardFooter className="px-5 pb-5">
+                      <Button
+                        asChild
+                        className="w-full bg-amber-500 text-stone-950 hover:bg-amber-600"
+                      >
+                        <Link to={`/events/${event.id}`}>View details</Link>
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default Events;
