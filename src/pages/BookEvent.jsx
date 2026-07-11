@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { Calendar,MapPin,Clock, Minus,Plus,Ticket,CheckCircle2,Smartphone,CreditCard,Lock,Loader2,AlertCircle,} from "lucide-react";
 
-const fallbackEventsData = 
+const fallbackEventsData = [
   {
     id: "1",
     name: "Nairobi Music & Food Festival",
@@ -10,7 +10,7 @@ const fallbackEventsData =
     venue: "Uhuru Gardens, Nairobi",
     image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80",
   }
-
+]
 
 const loadEventsData = async () => {
   try {
