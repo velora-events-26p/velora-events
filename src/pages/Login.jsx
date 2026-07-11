@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, CalendarDays } from "lucide-react";
 
+import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,18 +16,23 @@ import {
 } from "@/components/ui/card";
 
 export default function Login() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({});
+  const [formError, setFormError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear the field error as soon as the user starts fixing it
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
+    if (formError) setFormError("");
   };
 
   const validate = () => {
@@ -45,15 +51,20 @@ export default function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validate()) return;
 
-    // TODO(auth): hook this up to the real login logic once it's ready,
-    // e.g. await login(formData.email, formData.password) then navigate
-    // on success and show a real error on failure.
-    console.log("Login form submitted:", formData, { rememberMe });
+    setIsSubmitting(true);
+    setFormError("");
+    try {
+      await login({ email: formData.email, password: formData.password });
+      navigate("/");
+    } catch (err) {
+      setFormError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -83,7 +94,17 @@ export default function Login() {
           </CardHeader>
 
           <CardContent className="px-6">
-            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className="flex flex-col gap-4"
+            >
+              {formError && (
+                <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">
+                  {formError}
+                </p>
+              )}
+
               {/* Email */}
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="email" className="text-stone-700">
@@ -162,9 +183,10 @@ export default function Login() {
 
               <Button
                 type="submit"
-                className="mt-1 h-10 w-full bg-amber-500 text-white hover:bg-amber-600"
+                disabled={isSubmitting}
+                className="mt-1 h-10 w-full bg-amber-500 text-white hover:bg-amber-600 disabled:opacity-70"
               >
-                Log In
+                {isSubmitting ? "Logging in..." : "Log In"}
               </Button>
             </form>
           </CardContent>
