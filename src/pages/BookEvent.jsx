@@ -49,7 +49,7 @@ const fetchEventById = (id) =>
       const data = await loadEventsData();
       const found = data.find((e) => String(e.id) === String(id));
       if (found) {
-        resolve(found);
+        resolve(normalizeEvent(found));
       } else {
         reject(new Error("Event not found"));
       }
