@@ -22,6 +22,19 @@ const loadEventsData = async () => {
   }
 };
 
+const formatEventDate = (isoDate) => {
+  if (!isoDate) return "";
+  const parsed = new Date(isoDate);
+  if (Number.isNaN(parsed.getTime())) return isoDate;
+  return parsed.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+ 
+
 const fetchEventById = (id) =>
   new Promise((resolve, reject) => {
     setTimeout(async () => {
