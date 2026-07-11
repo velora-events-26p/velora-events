@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { Calendar,MapPin,Clock, Minus,Plus,Ticket,CheckCircle2,Smartphone,CreditCard,Lock,Loader2,AlertCircle,} from "lucide-react";
+import { useParams } from "react-router-dom";
 
 const fallbackEventsData = [
   {
@@ -71,7 +72,11 @@ const saveTicketToLocalStorage = (ticket) => {
   }
 };
 
-export default function ReserveTicketPage({ eventId = "1" }) {
+export default function BookEvent({ eventId: eventIdProp = "1" }) {
+
+    const { id: routeEventId } = useParams();
+    const eventId = routeEventId ?? eventIdProp;
+
   const [event, setEvent] = useState(null);
   const [eventLoading, setEventLoading] = useState(true);
   const [eventError, setEventError] = useState("");
