@@ -9,6 +9,7 @@
       "price": 2500,
       "organizer": "Velora Events",
       "availableTickets": 120,
+      "featured": true,
       "description": "Experience Kenya's biggest live music festival featuring top local and international artists.",
       "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=900&q=80"
     },
@@ -22,6 +23,7 @@
       "price": 1500,
       "organizer": "Velora Events",
       "availableTickets": 200,
+      "featured": false,
       "description": "Meet Kenya's top wedding planners, decorators, florists and photographers in one spectacular event.",
       "image": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80"
     },
@@ -35,6 +37,7 @@
       "price": 5000,
       "organizer": "Velora Events",
       "availableTickets": 85,
+      "featured": true,
       "description": "Network with CEOs, entrepreneurs and innovators from across Africa.",
       "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80"
     },
@@ -48,6 +51,7 @@
       "price": 1000,
       "organizer": "Velora Events",
       "availableTickets": 300,
+      "featured": false,
       "description": "Taste delicious cuisines while enjoying traditional dances, music and cultural performances.",
       "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80"
     },
@@ -61,6 +65,7 @@
       "price": 3500,
       "organizer": "Velora Events",
       "availableTickets": 150,
+      "featured": true,
       "description": "Discover the latest innovations in AI, robotics, software engineering and cybersecurity.",
       "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80"
     },
@@ -74,6 +79,7 @@
       "price": 4000,
       "organizer": "Velora Events",
       "availableTickets": 90,
+      "featured": false,
       "description": "An elegant fundraising dinner supporting children's education and community development.",
       "image": "https://images.unsplash.com/photo-1519167758481-83f29c7f4f4a?auto=format&fit=crop&w=900&q=80"
     },
@@ -87,6 +93,7 @@
       "price": 1800,
       "organizer": "Velora Events",
       "availableTickets": 140,
+      "featured": false,
       "description": "Laugh the night away with Kenya's funniest comedians and special guest performers.",
       "image": "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=80"
     },
@@ -100,6 +107,7 @@
       "price": 1200,
       "organizer": "Velora Events",
       "availableTickets": 500,
+      "featured": false,
       "description": "Join thousands of runners in Kenya's annual marathon challenge and compete for exciting prizes.",
       "image": "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=900&q=80"
     },
@@ -113,6 +121,7 @@
       "price": 2800,
       "organizer": "Velora Events",
       "availableTickets": 180,
+      "featured": false,
       "description": "Watch Kenya's leading designers unveil their latest collections in a glamorous runway experience.",
       "image": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80"
     },
@@ -126,6 +135,7 @@
       "price": 800,
       "organizer": "Velora Events",
       "availableTickets": 250,
+      "featured": false,
       "description": "Explore inspiring paintings, sculptures and photography from talented African artists.",
       "image": "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=900&q=80"
     },
@@ -139,6 +149,7 @@
       "price": 3200,
       "organizer": "Velora Events",
       "availableTickets": 140,
+      "featured": false,
       "description": "Meet successful entrepreneurs, investors and innovators shaping Africa's startup ecosystem.",
       "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80"
     },
@@ -152,6 +163,7 @@
       "price": 1000,
       "organizer": "Velora Events",
       "availableTickets": 500,
+      "featured": false,
       "description": "Bring the whole family for a day filled with games, rides, live performances, delicious food and exciting prizes.",
       "image": "https://images.unsplash.com/photo-1505236732171-72a5b19c4981?auto=format&fit=crop&w=900&q=80"
     }
