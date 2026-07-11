@@ -33,7 +33,15 @@ const formatEventDate = (isoDate) => {
     day: "numeric",
   });
 };
- 
+
+const normalizeEvent = (raw) => ({
+  id: raw.id,
+  name: raw.title ?? raw.name,
+  date: raw.date ? formatEventDate(raw.date) : raw.date,
+  time: raw.time,
+  venue: raw.location ?? raw.venue,
+  image: raw.image,
+});
 
 const fetchEventById = (id) =>
   new Promise((resolve, reject) => {
