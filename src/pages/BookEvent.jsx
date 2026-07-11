@@ -263,7 +263,7 @@ export default function BookEvent({ eventId: eventIdProp = "1" }) {
             Reserve Another Ticket
           </button>
           <a
-            href="/tickets"
+            href="/my-tickets"
             className="block text-center text-amber-600 font-semibold text-sm hover:text-amber-700"
           >
             Go to your tickets
