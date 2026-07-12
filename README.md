@@ -69,19 +69,7 @@ The following features can be added in future versions:
 ## Live Event Countdown
 
 Display countdown timers for upcoming events.
-
-
-
-## Event Booking System
-
-Allow users to:
-
-- Reserve tickets
-- View booking history
-- Receive confirmation details
-
----
-
+An auth protected checkout
 
 # Technology Stack
 
@@ -141,43 +129,46 @@ The project uses:
 Poppins
 
 
-Poppins was chosen because it provides:
-
-- Modern appearance
-- Excellent readability
-- Clean UI presentation
-- Professional branding style
-
----
 
 # Project Structure
-
 ```text
-velora-events/
+velora/
 │
 ├── public/
 │   └── images/
 │       └── events/
+│           ├── art-exhibition.jpg
+│           ├── business-summit.jpg
+│           ├── charity-dinner.jpg
+│           ├── comedy-night-live.jpg
+│           ├── family-carnival.jpg
+│           ├── fashion-runway.jpg
+│           ├── food-culture.jpg
+│           ├── luxury-wedding.jpg
+│           ├── marathon-challenge.jpg
+│           ├── music-festival.jpg
+│           ├── startup-entrepreneurship.jpg
+│           └── tech-innovation.jpg
 │
 ├── src/
 │   ├── assets/
-│   │   └── images/
+│   │   └── react.svg
 │   │
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Navbar.jsx
 │   │   │   └── Footer.jsx
 │   │   │
+│   │   ├── events/
+│   │   │   ├── EventCard.jsx
+│   │   │   ├── EventList.jsx
+│   │   │   └── EventFilter.jsx
+│   │   │
 │   │   └── ui/
-│   │       ├── badge.jsx
 │   │       ├── button.jsx
 │   │       ├── card.jsx
 │   │       ├── input.jsx
-│   │       ├── label.jsx
-│   │       └── other shadcn components
-│   │
-│   ├── context/
-│   │   └── ThemeContext.jsx
+│   │       └── badge.jsx
 │   │
 │   ├── data/
 │   │   └── events.json
@@ -186,15 +177,8 @@ velora-events/
 │   │   ├── Home.jsx
 │   │   ├── Events.jsx
 │   │   ├── EventDetails.jsx
-│   │   ├── BookEvent.jsx
-│   │   ├── MyTickets.jsx
-│   │   ├── Login.jsx
-│   │   ├── Signup.jsx
 │   │   ├── Contact.jsx
 │   │   └── NotFound.jsx
-│   │
-│   ├── lib/
-│   │   └── utils.js
 │   │
 │   ├── App.jsx
 │   ├── main.jsx

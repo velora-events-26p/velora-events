@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { CalendarDays, Menu, X } from "lucide-react";
+import { CalendarDays, Menu, X, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { useContext } from "react";
+import { ThemeContext } from "@/context/ThemeContext.jsx";
+
 function Navbar() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
@@ -20,11 +25,7 @@ function Navbar() {
     <header className="sticky top-0 z-50 border-b border-stone-200 bg-stone-50/90 backdrop-blur-md dark:border-stone-800 dark:bg-stone-950/90">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link
-          to="/"
-          onClick={closeMenu}
-          className="flex items-center gap-3"
-        >
+        <Link to="/" onClick={closeMenu} className="flex items-center gap-3">
           <div className="rounded-2xl bg-amber-500 p-2.5 text-stone-950 shadow-sm">
             <CalendarDays size={24} />
           </div>
@@ -61,6 +62,19 @@ function Navbar() {
 
         {/* Desktop Login */}
         <div className="hidden items-center gap-3 md:flex">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={toggleTheme}
+            aria-label={
+              theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            }
+            className="border-stone-300 dark:border-stone-700 dark:bg-stone-900"
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </Button>
+
           <Button
             asChild
             variant="outline"
@@ -110,6 +124,25 @@ function Navbar() {
             ))}
 
             <div className="my-2 border-t border-stone-200 dark:border-stone-800" />
+
+            <Button
+              type="button"
+              variant="outline"
+              onClick={toggleTheme}
+              className="w-full dark:border-stone-700"
+            >
+              {theme === "dark" ? (
+                <>
+                  <Sun size={18} />
+                  Light Mode
+                </>
+              ) : (
+                <>
+                  <Moon size={18} />
+                  Dark Mode
+                </>
+              )}
+            </Button>
 
             <Button
               asChild

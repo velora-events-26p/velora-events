@@ -157,11 +157,7 @@ export default function Home() {
 
           {/* Hero image */}
           <div className="relative flex min-h-[420px] items-center justify-center">
-            <img
-              src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1000&q=80"
-              alt="People enjoying an event"
-              className="h-[420px] w-full max-w-lg rounded-[36px] object-cover shadow-[0_20px_80px_rgba(245,158,11,0.18)] sm:h-[520px]"
-            />
+            
 
             <div className="absolute bottom-6 left-4 max-w-xs rounded-3xl border border-white/20 bg-stone-950/60 p-5 shadow-2xl backdrop-blur-xl sm:left-0">
               <CalendarDays
