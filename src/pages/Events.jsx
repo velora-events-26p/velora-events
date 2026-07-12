@@ -54,20 +54,22 @@ function Events() {
   }, [search, selectedCategory]);
 
   return (
-    <section className="min-h-screen bg-stone-50 py-16 text-stone-900">
+    <section className="min-h-screen bg-stone-50 py-16 text-stone-900 dark:bg-stone-950 dark:text-stone-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Page heading */}
         <div className="mx-auto mb-12 max-w-3xl text-center">
-          <Badge className="mb-4 bg-amber-100 text-amber-800 hover:bg-amber-100">
+          <Badge className="mb-4 bg-amber-100 text-amber-800 hover:bg-amber-100 dark:bg-amber-500/15 dark:text-amber-400 dark:hover:bg-amber-500/15">
             Explore Velora
           </Badge>
 
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="text-4xl font-extrabold tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl lg:text-6xl">
             Discover amazing{" "}
-            <span className="text-amber-600">events</span>
+            <span className="text-amber-600 dark:text-amber-400">
+              events
+            </span>
           </h1>
 
-          <p className="mt-5 text-base leading-7 text-stone-600 sm:text-lg">
+          <p className="mt-5 text-base leading-7 text-stone-600 dark:text-stone-400 sm:text-lg">
             Browse concerts, festivals, conferences, sports events, workshops,
             and unforgettable experiences happening around you.
           </p>
@@ -77,7 +79,7 @@ function Events() {
         <div className="relative mx-auto mb-12 max-w-3xl">
           <Search
             aria-hidden="true"
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 dark:text-stone-500"
             size={20}
           />
 
@@ -87,15 +89,17 @@ function Events() {
             onChange={(event) => setSearch(event.target.value)}
             placeholder="Search by event title or location..."
             aria-label="Search events"
-            className="h-12 rounded-xl border-stone-300 bg-white pl-12 focus-visible:border-amber-500 focus-visible:ring-amber-500/30"
+            className="h-12 rounded-xl border-stone-300 bg-white pl-12 text-stone-900 placeholder:text-stone-400 focus-visible:border-amber-500 focus-visible:ring-amber-500/30 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100 dark:placeholder:text-stone-500"
           />
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
           {/* Categories */}
           <aside>
-            <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
-              <h2 className="mb-5 text-xl font-semibold">Categories</h2>
+            <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm dark:border-stone-800 dark:bg-stone-900 lg:sticky lg:top-24">
+              <h2 className="mb-5 text-xl font-semibold text-stone-900 dark:text-stone-100">
+                Categories
+              </h2>
 
               <div className="flex flex-wrap gap-2 lg:flex-col">
                 {categories.map((category) => {
@@ -110,7 +114,7 @@ function Events() {
                       className={
                         isActive
                           ? "justify-start bg-amber-500 text-stone-950 hover:bg-amber-600"
-                          : "justify-start text-stone-600 hover:bg-stone-100 hover:text-stone-900"
+                          : "justify-start text-stone-600 hover:bg-stone-100 hover:text-stone-900 dark:text-stone-300 dark:hover:bg-stone-800 dark:hover:text-stone-100"
                       }
                     >
                       {category}
@@ -125,8 +129,11 @@ function Events() {
           <div>
             <div className="mb-6 flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-2xl font-bold">Upcoming events</h2>
-                <p className="mt-1 text-sm text-stone-500">
+                <h2 className="text-2xl font-bold text-stone-900 dark:text-stone-100">
+                  Upcoming events
+                </h2>
+
+                <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
                   {filteredEvents.length}{" "}
                   {filteredEvents.length === 1 ? "event" : "events"} found
                 </p>
@@ -140,7 +147,7 @@ function Events() {
                     setSearch("");
                     setSelectedCategory("All");
                   }}
-                  className="border-stone-300"
+                  className="border-stone-300 bg-white text-stone-700 hover:bg-stone-100 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200 dark:hover:bg-stone-800"
                 >
                   Clear filters
                 </Button>
@@ -148,10 +155,12 @@ function Events() {
             </div>
 
             {filteredEvents.length === 0 ? (
-              <div className="rounded-2xl border border-stone-200 bg-white px-6 py-16 text-center">
-                <h3 className="text-2xl font-semibold">No events found</h3>
+              <div className="rounded-2xl border border-stone-200 bg-white px-6 py-16 text-center dark:border-stone-800 dark:bg-stone-900">
+                <h3 className="text-2xl font-semibold text-stone-900 dark:text-stone-100">
+                  No events found
+                </h3>
 
-                <p className="mt-3 text-stone-600">
+                <p className="mt-3 text-stone-600 dark:text-stone-400">
                   Try another search term or select a different category.
                 </p>
               </div>
@@ -160,48 +169,62 @@ function Events() {
                 {filteredEvents.map((event) => (
                   <Card
                     key={event.id}
-                    className="group overflow-hidden border-stone-200 bg-white py-0 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+                    className="group overflow-hidden border-stone-200 bg-white py-0 text-stone-900 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-stone-800 dark:bg-stone-900 dark:text-stone-100"
                   >
-                    <div className="overflow-hidden">
+                    <div className="overflow-hidden bg-stone-200 dark:bg-stone-800">
                       <img
                         src={event.image}
                         alt={event.title}
+                        loading="lazy"
+                        decoding="async"
+                        onError={(error) => {
+                          error.currentTarget.onerror = null;
+                          error.currentTarget.src =
+                            "/images/event-placeholder.jpg";
+                        }}
                         className="h-52 w-full object-cover transition duration-500 group-hover:scale-105"
                       />
                     </div>
 
                     <CardHeader className="space-y-3 px-5 pt-5">
-                      <Badge className="w-fit bg-amber-100 text-amber-800 hover:bg-amber-100">
+                      <Badge className="w-fit bg-amber-100 text-amber-800 hover:bg-amber-100 dark:bg-amber-500/15 dark:text-amber-400 dark:hover:bg-amber-500/15">
                         {event.category || "General"}
                       </Badge>
 
-                      <CardTitle className="line-clamp-2 text-xl">
+                      <CardTitle className="line-clamp-2 text-xl text-stone-900 dark:text-stone-100">
                         {event.title}
                       </CardTitle>
                     </CardHeader>
 
-                    <CardContent className="space-y-3 px-5 text-sm text-stone-600">
+                    <CardContent className="space-y-3 px-5 text-sm text-stone-600 dark:text-stone-400">
                       <p className="flex items-start gap-2">
                         <MapPin
                           size={17}
-                          className="mt-0.5 shrink-0 text-amber-600"
+                          className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400"
                         />
-                        <span>{event.location || "Location unavailable"}</span>
+
+                        <span>
+                          {event.location || "Location unavailable"}
+                        </span>
                       </p>
 
                       <p className="flex items-start gap-2">
                         <CalendarDays
                           size={17}
-                          className="mt-0.5 shrink-0 text-amber-600"
+                          className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400"
                         />
+
                         <span>
                           {event.date || "Date unavailable"}
                           {event.time ? ` • ${event.time}` : ""}
                         </span>
                       </p>
 
-                      <p className="flex items-center gap-2 font-semibold text-stone-900">
-                        <Ticket size={17} className="text-amber-600" />
+                      <p className="flex items-center gap-2 font-semibold text-stone-900 dark:text-stone-100">
+                        <Ticket
+                          size={17}
+                          className="text-amber-600 dark:text-amber-400"
+                        />
 
                         {Number(event.price) === 0
                           ? "Free"
@@ -214,7 +237,9 @@ function Events() {
                         asChild
                         className="w-full bg-amber-500 text-stone-950 hover:bg-amber-600"
                       >
-                        <Link to={`/events/${event.id}`}>View details</Link>
+                        <Link to={`/events/${event.id}`}>
+                          View details
+                        </Link>
                       </Button>
                     </CardFooter>
                   </Card>
