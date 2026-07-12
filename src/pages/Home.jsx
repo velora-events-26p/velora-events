@@ -90,7 +90,9 @@ function formatDate(date) {
 }
 
 export default function Home() {
-  const markedFeaturedEvents = events.filter((event) => event.featured);
+  const markedFeaturedEvents = events.filter(
+    (event) => event.featured
+  );
 
   const featuredEvents =
     markedFeaturedEvents.length > 0
@@ -98,36 +100,42 @@ export default function Home() {
       : events.slice(0, 3);
 
   return (
-    <div className="overflow-hidden bg-stone-950 text-white">
+    <div className="overflow-hidden bg-stone-50 text-stone-900 transition-colors dark:bg-stone-950 dark:text-stone-100">
       {/* Hero section */}
-      <section className="relative flex min-h-[calc(100vh-5rem)] items-center px-4 py-20 sm:px-6 lg:px-8">
-        {/* Background decoration */}
-        <div className="absolute left-0 top-20 h-80 w-80 rounded-full bg-amber-500/20 blur-[140px]" />
+      <section className="relative flex min-h-[calc(100vh-5rem)] items-center overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
+        {/* Decorative background glows */}
+        <div className="pointer-events-none absolute left-0 top-20 h-80 w-80 rounded-full bg-amber-300/30 blur-[140px] dark:bg-amber-500/20" />
 
-        <div className="absolute bottom-10 right-0 h-96 w-96 rounded-full bg-amber-400/10 blur-[160px]" />
+        <div className="pointer-events-none absolute bottom-10 right-0 h-96 w-96 rounded-full bg-orange-200/30 blur-[160px] dark:bg-amber-400/10" />
 
-        <div className="absolute inset-0 bg-gradient-to-br from-stone-950 via-stone-900 to-stone-950" />
+        {/* Background gradient */}
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-stone-50 via-amber-50/60 to-stone-100 dark:from-stone-950 dark:via-stone-900 dark:to-stone-950" />
 
         <div className="relative mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-2">
           {/* Hero text */}
           <div>
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-white/5 px-5 py-2 backdrop-blur-xl">
-              <Sparkles className="text-amber-500" size={18} />
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-amber-300 bg-white/70 px-5 py-2 shadow-sm backdrop-blur-xl dark:border-amber-500/40 dark:bg-white/5">
+              <Sparkles
+                className="text-amber-600 dark:text-amber-400"
+                size={18}
+              />
 
-              <span className="text-xs font-medium uppercase tracking-[0.2em] text-stone-200 sm:text-sm">
+              <span className="text-xs font-medium uppercase tracking-[0.2em] text-stone-700 dark:text-stone-200 sm:text-sm">
                 Discover unforgettable experiences
               </span>
             </div>
 
-            <h1 className="text-4xl font-extrabold leading-tight sm:text-6xl lg:text-7xl xl:text-8xl">
+            <h1 className="text-4xl font-extrabold leading-tight text-stone-900 dark:text-stone-100 sm:text-6xl lg:text-7xl xl:text-8xl">
               Find your next
-              <span className="block text-amber-500">
+
+              <span className="block text-amber-600 dark:text-amber-400">
                 unforgettable
               </span>
+
               experience
             </h1>
 
-            <p className="mt-8 max-w-xl text-base leading-8 text-stone-300 sm:text-lg">
+            <p className="mt-8 max-w-xl text-base leading-8 text-stone-600 dark:text-stone-300 sm:text-lg">
               Discover concerts, festivals, conferences, exhibitions and
               exciting experiences happening around you. Velora Events makes
               finding your next plan simple.
@@ -148,146 +156,164 @@ export default function Home() {
 
               <Link
                 to="/contact"
-                className="rounded-full border border-amber-500 px-7 py-4 font-semibold text-white transition duration-300 hover:bg-amber-500 hover:text-stone-950"
+                className="rounded-full border border-amber-600 px-7 py-4 font-semibold text-amber-700 transition duration-300 hover:bg-amber-500 hover:text-stone-950 dark:border-amber-500 dark:text-stone-100 dark:hover:text-stone-950"
               >
                 Contact Us
               </Link>
             </div>
           </div>
 
-          {/* Hero image */}
+          {/* Featured event preview */}
           <div className="relative flex min-h-[420px] items-center justify-center">
-            
+            <div className="absolute inset-6 rounded-[40px] bg-linear-to-br from-amber-100 via-white to-stone-200 shadow-2xl dark:from-stone-800 dark:via-stone-900 dark:to-stone-950" />
 
-            <div className="absolute bottom-6 left-4 max-w-xs rounded-3xl border border-white/20 bg-stone-950/60 p-5 shadow-2xl backdrop-blur-xl sm:left-0">
-              <CalendarDays
-                className="mb-4 text-amber-500"
-                size={32}
+            <div className="relative w-full max-w-md overflow-hidden rounded-[32px] border border-stone-200 bg-white shadow-2xl dark:border-stone-700 dark:bg-stone-900">
+              <img
+                src={featuredEvents[0]?.image}
+                alt={
+                  featuredEvents[0]?.title ||
+                  "Featured Velora event"
+                }
+                fetchPriority="high"
+                decoding="async"
+                onError={(event) => {
+                  event.currentTarget.onerror = null;
+                  event.currentTarget.src =
+                    "/images/event-placeholder.jpg";
+                }}
+                className="h-72 w-full object-cover"
               />
 
-              <p className="text-sm text-stone-300">
-                Upcoming event
-              </p>
+              <div className="p-6">
+                <div className="flex items-center gap-2 text-sm font-medium text-amber-700 dark:text-amber-400">
+                  <CalendarDays size={18} />
+                  Upcoming event
+                </div>
 
-              <h2 className="mt-2 text-xl font-bold sm:text-2xl">
-                {featuredEvents[0]?.title || "Nairobi Music Festival"}
-              </h2>
+                <h2 className="mt-3 text-2xl font-bold text-stone-900 dark:text-stone-100">
+                  {featuredEvents[0]?.title ||
+                    "Nairobi Music Festival"}
+                </h2>
 
-              <p className="mt-3 text-sm text-stone-300">
-                {featuredEvents[0]
-                  ? `${formatDate(featuredEvents[0].date)} • ${
-                      featuredEvents[0].location
-                    }`
-                  : "25 July 2026 • KICC, Nairobi"}
-              </p>
+                <p className="mt-3 text-sm leading-6 text-stone-600 dark:text-stone-400">
+                  {featuredEvents[0]
+                    ? `${formatDate(
+                        featuredEvents[0].date
+                      )} • ${featuredEvents[0].location}`
+                    : "25 July 2026 • KICC, Nairobi"}
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
+        {/* Scroll indicator */}
         <div className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center md:flex">
-          <p className="mb-2 text-sm text-stone-400">
+          <p className="mb-2 text-sm text-stone-500 dark:text-stone-400">
             Scroll
           </p>
 
           <ChevronDown
-            className="animate-bounce text-amber-500"
+            className="animate-bounce text-amber-600 dark:text-amber-400"
             size={28}
           />
         </div>
       </section>
 
       {/* Event categories */}
-      <section className="bg-stone-900 px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section className="bg-white px-4 py-20 transition-colors dark:bg-stone-900 sm:px-6 lg:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="mb-14 text-center">
-            <p className="font-semibold uppercase tracking-[6px] text-amber-500">
+            <p className="font-semibold uppercase tracking-[6px] text-amber-600 dark:text-amber-400">
               Discover
             </p>
 
-            <h2 className="mt-4 text-3xl font-bold sm:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold text-stone-900 dark:text-stone-100 sm:text-5xl">
               Event Categories
             </h2>
 
-            <p className="mx-auto mt-5 max-w-2xl leading-8 text-stone-400">
+            <p className="mx-auto mt-5 max-w-2xl leading-8 text-stone-600 dark:text-stone-400">
               Explore experiences across music, weddings, business,
               celebrations and much more.
             </p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map(({ title, description, icon: Icon }) => (
-              <article
-                key={title}
-                className="group rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-amber-500"
-              >
-                <Icon
-                  size={42}
-                  className="text-amber-500 transition group-hover:scale-110"
-                />
+            {categories.map(
+              ({ title, description, icon: Icon }) => (
+                <article
+                  key={title}
+                  className="group rounded-3xl border border-stone-200 bg-stone-50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-amber-400 hover:shadow-lg dark:border-stone-800 dark:bg-stone-950/60 dark:hover:border-amber-500"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 transition group-hover:scale-110 dark:bg-amber-500/15 dark:text-amber-400">
+                    <Icon size={30} />
+                  </div>
 
-                <h3 className="mt-6 text-2xl font-semibold">
-                  {title}
-                </h3>
+                  <h3 className="mt-6 text-2xl font-semibold text-stone-900 dark:text-stone-100">
+                    {title}
+                  </h3>
 
-                <p className="mt-4 leading-7 text-stone-400">
-                  {description}
-                </p>
-              </article>
-            ))}
+                  <p className="mt-4 leading-7 text-stone-600 dark:text-stone-400">
+                    {description}
+                  </p>
+                </article>
+              )
+            )}
           </div>
         </div>
       </section>
 
       {/* Why choose Velora */}
-      <section className="bg-stone-950 px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section className="bg-stone-50 px-4 py-20 transition-colors dark:bg-stone-950 sm:px-6 lg:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
-            <p className="font-semibold uppercase tracking-[6px] text-amber-500">
+            <p className="font-semibold uppercase tracking-[6px] text-amber-600 dark:text-amber-400">
               Why Us
             </p>
 
-            <h2 className="mt-4 text-3xl font-bold sm:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold text-stone-900 dark:text-stone-100 sm:text-5xl">
               Why Choose Velora?
             </h2>
           </div>
 
           <div className="mt-14 grid gap-8 lg:grid-cols-3">
-            {benefits.map(({ title, description, icon: Icon }) => (
-              <article
-                key={title}
-                className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:border-amber-500 hover:shadow-[0_0_40px_rgba(245,158,11,0.16)] sm:p-10"
-              >
-                <Icon
-                  size={44}
-                  className="mb-6 text-amber-500"
-                />
+            {benefits.map(
+              ({ title, description, icon: Icon }) => (
+                <article
+                  key={title}
+                  className="rounded-3xl border border-stone-200 bg-white p-8 shadow-sm transition duration-300 hover:border-amber-400 hover:shadow-lg dark:border-stone-800 dark:bg-stone-900 dark:hover:border-amber-500 dark:hover:shadow-[0_0_40px_rgba(245,158,11,0.12)] sm:p-10"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-400">
+                    <Icon size={30} />
+                  </div>
 
-                <h3 className="text-2xl font-semibold">
-                  {title}
-                </h3>
+                  <h3 className="mt-6 text-2xl font-semibold text-stone-900 dark:text-stone-100">
+                    {title}
+                  </h3>
 
-                <p className="mt-5 leading-8 text-stone-400">
-                  {description}
-                </p>
-              </article>
-            ))}
+                  <p className="mt-5 leading-8 text-stone-600 dark:text-stone-400">
+                    {description}
+                  </p>
+                </article>
+              )
+            )}
           </div>
         </div>
       </section>
 
       {/* Featured events */}
-      <section className="bg-stone-900 px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section className="bg-white px-4 py-20 transition-colors dark:bg-stone-900 sm:px-6 lg:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="mb-14 text-center">
-            <p className="font-semibold uppercase tracking-[6px] text-amber-500">
+            <p className="font-semibold uppercase tracking-[6px] text-amber-600 dark:text-amber-400">
               Upcoming
             </p>
 
-            <h2 className="mt-4 text-3xl font-bold sm:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold text-stone-900 dark:text-stone-100 sm:text-5xl">
               Featured Events
             </h2>
 
-            <p className="mt-5 text-stone-400">
+            <p className="mt-5 text-stone-600 dark:text-stone-400">
               Find your next experience before tickets run out.
             </p>
           </div>
@@ -296,45 +322,48 @@ export default function Home() {
             {featuredEvents.map((event) => (
               <article
                 key={event.id}
-                className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition duration-300 hover:-translate-y-2 hover:border-amber-500"
+                className="group overflow-hidden rounded-3xl border border-stone-200 bg-stone-50 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-amber-400 hover:shadow-lg dark:border-stone-800 dark:bg-stone-950/60 dark:hover:border-amber-500"
               >
-                <div className="overflow-hidden">
+                <div className="overflow-hidden bg-stone-200 dark:bg-stone-800">
                   <img
                     src={event.image}
                     alt={event.title}
+                    loading="lazy"
+                    decoding="async"
+                    onError={(imageEvent) => {
+                      imageEvent.currentTarget.onerror = null;
+                      imageEvent.currentTarget.src =
+                        "/images/event-placeholder.jpg";
+                    }}
                     className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                 </div>
 
                 <div className="p-7">
-                  <span className="inline-block rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-stone-950">
+                  <span className="inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800 dark:bg-amber-500/15 dark:text-amber-400">
                     {event.category}
                   </span>
 
-                  <h3 className="mt-4 text-2xl font-bold">
+                  <h3 className="mt-4 text-2xl font-bold text-stone-900 dark:text-stone-100">
                     {event.title}
                   </h3>
 
-                  <div className="mt-4 flex items-start gap-2 text-stone-400">
+                  <div className="mt-4 flex items-start gap-2 text-stone-600 dark:text-stone-400">
                     <CalendarDays
                       size={18}
-                      className="mt-0.5 shrink-0 text-amber-500"
+                      className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400"
                     />
 
-                    <span>
-                      {formatDate(event.date)}
-                    </span>
+                    <span>{formatDate(event.date)}</span>
                   </div>
 
-                  <div className="mt-3 flex items-start gap-2 text-stone-400">
+                  <div className="mt-3 flex items-start gap-2 text-stone-600 dark:text-stone-400">
                     <MapPin
                       size={18}
-                      className="mt-0.5 shrink-0 text-amber-500"
+                      className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400"
                     />
 
-                    <span>
-                      {event.location}
-                    </span>
+                    <span>{event.location}</span>
                   </div>
 
                   <Link
@@ -352,7 +381,7 @@ export default function Home() {
           <div className="mt-12 text-center">
             <Link
               to="/events"
-              className="inline-flex items-center gap-2 font-semibold text-amber-500 transition hover:text-amber-400"
+              className="inline-flex items-center gap-2 font-semibold text-amber-700 transition hover:text-amber-600 dark:text-amber-400 dark:hover:text-amber-300"
             >
               View all events
               <ArrowRight size={18} />
@@ -362,14 +391,14 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-stone-950 px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section className="bg-stone-50 px-4 py-20 transition-colors dark:bg-stone-950 sm:px-6 lg:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
-            <p className="uppercase tracking-[6px] text-amber-500">
+            <p className="font-semibold uppercase tracking-[6px] text-amber-600 dark:text-amber-400">
               Testimonials
             </p>
 
-            <h2 className="mt-4 text-3xl font-bold sm:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold text-stone-900 dark:text-stone-100 sm:text-5xl">
               What Our Users Say
             </h2>
           </div>
@@ -378,7 +407,7 @@ export default function Home() {
             {testimonials.map((review) => (
               <article
                 key={review.name}
-                className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:border-amber-500"
+                className="rounded-3xl border border-stone-200 bg-white p-8 shadow-sm transition duration-300 hover:border-amber-400 hover:shadow-lg dark:border-stone-800 dark:bg-stone-900 dark:hover:border-amber-500"
               >
                 <div className="mb-6 flex">
                   {[1, 2, 3, 4, 5].map((star) => (
@@ -390,11 +419,11 @@ export default function Home() {
                   ))}
                 </div>
 
-                <p className="leading-8 text-stone-300">
+                <p className="leading-8 text-stone-600 dark:text-stone-300">
                   “{review.text}”
                 </p>
 
-                <h3 className="mt-8 text-xl font-bold">
+                <h3 className="mt-8 text-xl font-bold text-stone-900 dark:text-stone-100">
                   {review.name}
                 </h3>
               </article>
@@ -404,9 +433,9 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-stone-950 px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section className="bg-white px-4 py-20 transition-colors dark:bg-stone-900 sm:px-6 lg:px-8 lg:py-28">
         <div className="mx-auto max-w-6xl">
-          <div className="rounded-[32px] bg-gradient-to-r from-amber-500 to-amber-300 p-8 text-center shadow-[0_20px_80px_rgba(245,158,11,0.25)] sm:p-12 lg:p-16">
+          <div className="rounded-[32px] bg-linear-to-r from-amber-500 to-amber-300 p-8 text-center shadow-[0_20px_80px_rgba(245,158,11,0.25)] sm:p-12 lg:p-16">
             <h2 className="text-3xl font-extrabold text-stone-950 sm:text-5xl">
               Ready to find your next unforgettable experience?
             </h2>
@@ -419,7 +448,7 @@ export default function Home() {
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Link
                 to="/events"
-                className="rounded-full bg-stone-950 px-8 py-4 font-semibold text-white transition duration-300 hover:scale-105"
+                className="rounded-full bg-stone-950 px-8 py-4 font-semibold text-white transition duration-300 hover:scale-105 hover:bg-stone-900"
               >
                 Browse Events
               </Link>
