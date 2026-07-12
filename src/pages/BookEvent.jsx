@@ -1,7 +1,8 @@
 import { useState, useMemo, useEffect } from "react";
 import { Calendar,MapPin,Clock, Minus,Plus,Ticket,CheckCircle2,Smartphone,CreditCard,Lock,Loader2,AlertCircle,} from "lucide-react";
+import { useParams } from "react-router-dom";
 
-const fallbackEventsData = 
+const fallbackEventsData = [
   {
     id: "1",
     name: "Nairobi Music & Food Festival",
@@ -10,7 +11,7 @@ const fallbackEventsData =
     venue: "Uhuru Gardens, Nairobi",
     image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80",
   }
-
+]
 
 const loadEventsData = async () => {
   try {
@@ -22,13 +23,34 @@ const loadEventsData = async () => {
   }
 };
 
+const formatEventDate = (isoDate) => {
+  if (!isoDate) return "";
+  const parsed = new Date(isoDate);
+  if (Number.isNaN(parsed.getTime())) return isoDate;
+  return parsed.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+const normalizeEvent = (raw) => ({
+  id: raw.id,
+  name: raw.title ?? raw.name,
+  date: raw.date ? formatEventDate(raw.date) : raw.date,
+  time: raw.time,
+  venue: raw.location ?? raw.venue,
+  image: raw.image,
+});
+
 const fetchEventById = (id) =>
   new Promise((resolve, reject) => {
     setTimeout(async () => {
       const data = await loadEventsData();
       const found = data.find((e) => String(e.id) === String(id));
       if (found) {
-        resolve(found);
+        resolve(normalizeEvent(found));
       } else {
         reject(new Error("Event not found"));
       }
@@ -50,7 +72,11 @@ const saveTicketToLocalStorage = (ticket) => {
   }
 };
 
-export default function ReserveTicketPage({ eventId = "1" }) {
+export default function BookEvent({ eventId: eventIdProp = "1" }) {
+
+    const { id: routeEventId } = useParams();
+    const eventId = routeEventId ?? eventIdProp;
+
   const [event, setEvent] = useState(null);
   const [eventLoading, setEventLoading] = useState(true);
   const [eventError, setEventError] = useState("");
@@ -237,7 +263,7 @@ export default function ReserveTicketPage({ eventId = "1" }) {
             Reserve Another Ticket
           </button>
           <a
-            href="/tickets"
+            href="/my-tickets"
             className="block text-center text-amber-600 font-semibold text-sm hover:text-amber-700"
           >
             Go to your tickets
