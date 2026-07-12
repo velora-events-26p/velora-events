@@ -32,8 +32,8 @@ function EventDetails() {
   // Display this when the requested event does not exist.
   if (!event) {
     return (
-      <section className="flex min-h-[70vh] items-center justify-center bg-stone-50 px-4">
-        <Card className="w-full max-w-lg border-stone-200 text-center shadow-sm">
+      <section className="flex min-h-[70vh] items-center justify-center bg-stone-50 px-4 dark:bg-stone-950 dark:text-stone-100 ">
+        <Card className="w-full max-w-lg border-stone-200 text-center shadow-sm dark:border-stone-800 dark:bg-stone-900">
           <CardContent className="p-8">
             <h1 className="text-3xl font-bold text-stone-900">
               Event not found
