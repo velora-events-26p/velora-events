@@ -39,7 +39,7 @@
       "availableTickets": 85,
       "featured": true,
       "description": "Network with CEOs, entrepreneurs and innovators from across Africa.",
-      "image": "/images/events/business-leadership-summit.jpg"
+      "image": "/images/events/business-summit.jpg"
     },
     {
       "id": 4,
@@ -53,7 +53,7 @@
       "availableTickets": 300,
       "featured": false,
       "description": "Taste delicious cuisines while enjoying traditional dances, music and cultural performances.",
-      "image": "/images/events/food-culture-festival.jpg"
+      "image": "/images/events/food-culture.jpg"
     },
     {
       "id": 5,
@@ -67,7 +67,7 @@
       "availableTickets": 150,
       "featured": true,
       "description": "Discover the latest innovations in AI, robotics, software engineering and cybersecurity.",
-      "image": "/images/events/tech-innovation-expo.jpg"
+      "image": "/images/events/tech-innovation.jpg"
     },
     {
       "id": 6,
@@ -81,7 +81,7 @@
       "availableTickets": 90,
       "featured": false,
       "description": "An elegant fundraising dinner supporting children's education and community development.",
-      "image": "/images/events/charity-gala-dinner.jpg"
+      "image": "/images/events/charity-dinner.jpg"
     },
     {
       "id": 7,
@@ -123,7 +123,7 @@
       "availableTickets": 180,
       "featured": false,
       "description": "Watch Kenya's leading designers unveil their latest collections in a glamorous runway experience.",
-      "image": "/images/events/fashion-runway-showcase.jpg"
+      "image": "/images/events/fashion-runway.jpg"
     },
     {
       "id": 10,
@@ -137,7 +137,7 @@
       "availableTickets": 250,
       "featured": false,
       "description": "Explore inspiring paintings, sculptures and photography from talented African artists.",
-      "image": "/images/events/art-photography-exhibition.jpg"
+      "image": "/images/events/art-exhibition.jpg"
     },
     {
       "id": 11,
@@ -151,7 +151,7 @@
       "availableTickets": 140,
       "featured": false,
       "description": "Meet successful entrepreneurs, investors and innovators shaping Africa's startup ecosystem.",
-      "image": "/images/events/startup-entrepreneurship-forum.jpg"
+      "image": "/images/events/startup-entrepreneurship.jpg"
     },
     {
       "id": 12,
@@ -165,6 +165,6 @@
       "availableTickets": 500,
       "featured": false,
       "description": "Bring the whole family for a day filled with games, rides, live performances, delicious food and exciting prizes.",
-      "image": "/images/events/family-fun-carnival.jpg"
+      "image": "/images/events/family-carnival.jpg"
     }
   ]
