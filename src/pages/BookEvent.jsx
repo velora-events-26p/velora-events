@@ -210,7 +210,7 @@ export default function BookEvent({ eventId: eventIdProp = "1" }) {
   if (eventError || !event) {
     return (
       <div
-        className="min-h-screen flex items-center justify-center bg-white px-6"
+        className="min-h-screen flex items-center justify-center bg-white px-6 dark:bg-stone-950 dark:text-stone-100"
       >
         <link
           rel="stylesheet"
@@ -231,7 +231,7 @@ export default function BookEvent({ eventId: eventIdProp = "1" }) {
   if (submitted) {
     return (
       <div
-        className="min-h-screen flex items-center justify-center bg-white px-6"
+        className="min-h-screen flex items-center justify-center bg-white px-6" dark:bg-stone-950 dark:text-stone-100
       >
         <link
           rel="stylesheet"
