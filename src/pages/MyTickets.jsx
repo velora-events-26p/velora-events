@@ -54,7 +54,7 @@ export default function MyTicketsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-stone-800" style={{ fontFamily: "'Poppins', sans-serif" }}>
+    <div className="min-h-screen bg-white text-stone-800" dark:bg-stone-950 dark:text-stone-100 style={{ fontFamily: "'Poppins', sans-serif" }}>
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
