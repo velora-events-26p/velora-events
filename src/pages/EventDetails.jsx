@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+
 
 import events from "@/data/events.json";
 
@@ -19,6 +21,10 @@ import { Card, CardContent } from "@/components/ui/card";
 function EventDetails() {
   // Get the event ID from the URL.
   const { id } = useParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   // Convert the URL ID into a number and find the matching event.
   const event = events.find((item) => item.id === Number(id));
