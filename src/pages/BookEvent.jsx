@@ -42,6 +42,7 @@ const normalizeEvent = (raw) => ({
   time: raw.time,
   venue: raw.location ?? raw.venue,
   image: raw.image,
+  price : raw.price ?? 0,
 });
 
 const fetchEventById = (id) =>
