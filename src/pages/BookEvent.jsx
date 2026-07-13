@@ -42,6 +42,7 @@ const normalizeEvent = (raw) => ({
   time: raw.time,
   venue: raw.location ?? raw.venue,
   image: raw.image,
+  price : raw.price ?? 0,
 });
 
 const fetchEventById = (id) =>
@@ -91,12 +92,17 @@ export default function BookEvent({ eventId: eventIdProp = "1" }) {
       .catch(() => setEventError("We couldn't load this event. Please try again."))
       .finally(() => setEventLoading(false));
   }, [eventId]);
-
-  const ticketTiers = [
-    { id: "regular", name: "Regular", price: 1500, description: "General access to all festival areas" },
-    { id: "vip", name: "VIP", price: 4500, description: "Front stage access, VIP lounge, complimentary drink" },
-    { id: "group", name: "Group of 5", price: 6500, description: "5 Regular tickets bundled, save 10%" },
-  ];
+  
+  const ticketTiers = useMemo(() => {
+    if (!event) return [];
+    const base = event.price;
+    
+    return [
+      { id: "regular", name: "Regular", price: base, description: "General access to all festival areas" },
+      { id: "vip", name: "VIP", price: Math.round(base * 3), description: "Front stage access, VIP lounge, complimentary drink" },
+      { id: "group", name: "Group of 5", price: Math.round(base * 5 * 0.9), description: "5 Regular tickets bundled, save 10%" },
+    ];
+  }, [event]);
 
   const [selectedTier, setSelectedTier] = useState("regular");
   const [quantity, setQuantity] = useState(1);
